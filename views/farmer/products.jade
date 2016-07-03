@@ -1,0 +1,19 @@
+extends layout
+
+block content
+	.row
+		.col.s12.m12.l8
+			h2 List of Products
+			each product in products
+				.card
+					.card-image.product-image
+						img(src='/products/#{product.pictureUrl}' alt='#{product.title}')
+					.card-content
+						span.card-title.activator.black-text= product.title							
+						p Quantity: #{product.quantity}
+						p Price: US$ #{product.price}
+						p Rotten: #{product.rotten}
+						p= product.description
+					.card-action
+						form(name='delete' method='post' action='/farmer/products/#{product._id}/delete')
+							button.blue-color.modal-action.modal-close.waves-effect.waves-green.btn-flat Delete this product					

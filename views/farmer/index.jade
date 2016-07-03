@@ -1,0 +1,34 @@
+extends layout
+
+block content
+	.row
+		.col.s12.m12.l12
+			.card				
+				.card-content
+					.row
+						img(src='farmers/#{farmer.pictureUrl}' alt='#{farmer.name}' class='circle company-img')
+					.row
+						a.modal-trigger(href='#modal1') Edit your profile image
+						#modal1.modal
+							.modal-content
+								h5.center Edit your profile image
+								img(src='farmers/#{farmer.pictureUrl}' alt='#{farmer.name}' class='circle company-img')
+								.center
+									form(method="post" action="/farmer/profileImage" enctype="multipart/form-data") 									
+										input(type="file" name="newImage" accept="image/*" required)
+										br 
+										button.blue-color.modal-action.modal-close.waves-effect.waves-green.btn-flat Ok
+										a.modal-action.modal-close.waves-effect.waves-green.btn-flat(href='#!') Cancel		
+					span.card-title.black-text= farmer.name
+					p= farmer.description
+					p Address: #{farmer.address}
+					p Email: #{farmer.email}
+					p Website: 
+						a(href='#{farmer.website}')= farmer.website
+				.card-action
+					a(href='/farmer/edit') Edit your profile					
+	script.
+		 $(document).ready(function(){
+		    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+		    $('.modal-trigger').leanModal();
+		  });

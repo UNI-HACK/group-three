@@ -1,0 +1,32 @@
+extends layout
+
+block content
+	.container
+		.row
+			.col.s12.m12.l12
+				h3 List of Products
+				form(name='add' method='post' action='/products' class='col s12 m12 l8 search-box')
+					.row
+						.input-field.col.s12.m8
+							input(type='text' id='term' name='term' class='validate' placeholder='Search a product' required)
+							label(for='term')= 'Search'
+						.input-field.col.s12.m4
+							input(type="submit", value="Search" class='btn blue darken-1')
+			.col.s12.m12.l12
+				each product in products
+					.card
+						.card-image.product-image
+							img(src='/products/#{product.pictureUrl}' alt='#{product.title}')
+						.card-content
+							span.card-title.activator.black-text= product.title
+							h5 US$ #{product.price}
+							p #{product.quantity} Available							
+							//p Rotten: #{product.rotten}
+							p
+								b Product Description
+							p.product-description= product.description
+							p
+								b Farmer
+							p= product.farmer.name
+						.card-action
+							a(href='/login') Buy

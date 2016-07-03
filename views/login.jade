@@ -1,0 +1,59 @@
+extends layout
+
+block content
+	//script.
+		window.fbAsyncInit = function() {
+		FB.init({appId: '1499632757032646', xfbml: true, version: 'v2.5'});};
+
+		(function(d, s, id){
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) {return;}
+			js = d.createElement(s); js.id = id;
+			js.src = "//connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	//div(class="fb-like" data-share="true" data-width="450" data-show-faces="true")
+	//script(src="https://apis.google.com/js/platform.js" async defer)
+	//meta(name="google-signin-client_id" content="680109038847-e2sfqkhp01chcghj2btb98rcqi3ovtg2.apps.googleusercontent.com")
+	.container
+		.row
+			.col.l6.m12.s12
+				h4 Customers
+				h5 Login with
+				.row
+					a.waves-effect.waves-light.btn.btn-fb(href="/auth/facebook") 
+						li.fa.fa-facebook 
+							span Facebook
+					//a(href="/auth/facebook") Login via Facebook
+				.row
+					//div(class="g-signin2" data-onsuccess="onSignIn")
+					a.waves-effect.waves-light.btn.btn-google(href="/auth/google")
+						li.fa.fa-google 
+							span Gmail
+					//a.waves-effect.waves-light.btn.red Gmail
+				//.row
+					a.waves-effect.waves-light.btn.blue Twitter				
+			.col.l6.m12.s12
+				h4 Farmers
+				.row
+					if error
+						.row
+							span.red-text= error.error
+					form(name="login" class='col s8' method="post", action='/login')
+						.row
+							.input-field.col.s12
+								input(type='text' id='email' name='email' class='validate' required)
+								label(for='email') Email
+						.row
+							.input-field.col.s12
+								input(type='password' id='password' name='password' class='validate' required)
+								label(for='password') Password
+						.row
+							.input-field.col.s12
+								input(type="submit" class='btn valign center' value="Log In")
+				.row
+					p Don't you have an account?
+						a(href='/signup')  Sign out here
+					p
+						a(href='/forgot') I forgot my password
+	

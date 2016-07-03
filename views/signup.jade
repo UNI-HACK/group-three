@@ -1,0 +1,40 @@
+extends layout
+
+block content
+	script(src='https://www.google.com/recaptcha/api.js')
+	.container
+		.row
+			.col.l6.m12.s12
+				h3 Sign Up
+				.row
+					form(name="signup" class='col s8' method="post", action='/signup')
+						.row
+							.input-field.col.s12
+								input(type='text' id='email' name='email' class='validate' required)
+								label(for='email') Email
+						.row
+							.input-field.col.s12
+								input(type='password' id='password' name='password' class='validate' required)
+								label(for='password') Write a password
+						.row
+							.input-field.col.s12
+								input(type='text' id='name' name='name' class='validate' required)
+								label(for='name') Farmer's name
+						.row
+							.input-field.col.s12
+								input(type='text' id='phone' name='phone' class='validate' required)
+								label(for='phone') Phone
+						.row
+							.input-field.col.s12
+								textarea(name='description' id='description' class='materialize-textarea' rows= 5 placeholder='...' required)
+								label(for='description')= 'Write something about you'
+						.row
+							.input-field.col.s12
+								textarea(name='address' id='address' class='materialize-textarea' rows= 5 placeholder='...' required)
+								label(for='address')= 'Your Address'
+						.row
+							.input-field.col.s12
+								div(class="g-recaptcha" data-sitekey="6Ld_1hgTAAAAAHgvt_3UkrwHuLSjKvE1ML8A90IV")
+						.row
+							.input-field.col.s12
+								input(type="submit", value="Sign Up" class='btn')

@@ -1,0 +1,27 @@
+extends layout
+
+block content
+	.row
+		.col.s12.m12.l8
+			h3 Edit your profile
+			.row
+				form(name="editProfile" class='col s12 m12 l12' method="post" action='/customer/edit')
+					.row
+						.input-field.col.s12.m12.l12
+							input(type='text' id='name' name='name' value='#{customer.personalInformation.name}' class='validate' required)
+							label(for='name') Name
+					.row
+						.input-field.col.s12.m12.l12
+							input(type='text' id='phone' name='phone' value='#{customer.personalInformation.phone}' class='validate' required)
+							label(for='phone') Phone
+					.row
+						.input-field.col.s12.m12.l12
+							textarea(name='about' id='about' class='materialize-textarea' rows= 5 placeholder='...' required)= customer.about
+							label(for='description')= 'Write about you'
+					.row
+						.input-field.col.s12.m12.l12
+							input(type='text' id='email' name='email' value='#{customer.personalInformation.email}' class='validate' required)
+							label(for='email') Write an aditional Email
+					.row
+						.input-field.col.s12.m12.l12
+							input(type="submit", value="Update" class='btn')

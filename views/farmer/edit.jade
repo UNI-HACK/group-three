@@ -1,0 +1,31 @@
+extends layout
+
+block content
+	.row
+		.col.s12.m12.l8
+			h3 Edit your Profile
+			.row
+				form(name="signup" method="post", action='/farmer/edit')
+					.row
+						.input-field.col.s12
+							input(type='text' id='name' name='name' value='#{farmer.name}' class='validate' required)
+							label(for='name') Name
+					.row
+						.input-field.col.s12
+							input(type='text' id='phone' name='phone' value='#{farmer.phone}' class='validate' required)
+							label(for='phone') Phone
+					.row
+						.input-field.col.s12
+							input(type='text' id='website' name='website' value='#{farmer.website}' class='validate')
+							label(for='phone') Website
+					.row
+						.input-field.col.s12
+							textarea(name='description' id='description' class='materialize-textarea' rows= 5 placeholder='...' required)= farmer.description
+							label(for='description')= 'About you'
+					.row
+						.input-field.col.s12
+							textarea(name='address' id='address' class='materialize-textarea' rows= 5 placeholder='...' required)= farmer.address
+							label(for='address')= 'Address'
+					.row
+						.input-field.col.s12
+							input(type="submit", value="Update" class='btn')

@@ -1,0 +1,49 @@
+extends layout
+
+block content
+	.row
+		// Personal Information
+		.col.s12.m12.l12
+			.card				
+				.card-content
+					.row
+						img(src='/customers/#{customer.pictureUrl}' alt='#{customer.personalInformation.name}' class='circle company-img center')
+					.row
+						a.modal-trigger(href='#modal1') Edit image
+						#modal1.modal
+							.modal-content
+								h5.center Change profile's image
+								img(src='customers/#{customer.pictureUrl}' alt='#{customer.personalInformation.name}' class='circle company-img')
+								.center
+									form(method="post" action="/customer/profileImage" enctype="multipart/form-data" required) 
+										input(type="file" name="newImage" accept="image/*") 
+										br
+										button.blue-color.modal-action.modal-close.waves-effect.waves-green.btn-flat Ok
+										a.modal-action.modal-close.waves-effect.waves-green.btn-flat(href='#!') Cancel
+					span.card-title.black-text= customer.personalInformation.name
+					p 
+						b Phone
+					p= customer.personalInformation.phone
+					p 
+						b About you
+					p= customer.about
+					p
+						b Aditional Email
+					p= customer.personalInformation.email
+				.card-action
+					a(href='/customer/edit') Edit your profile
+
+		
+		.col.s12.m12.l4			
+			
+
+		
+		
+		.col.s12.m12.l4			
+			
+			
+	script.
+		 $(document).ready(function(){
+		    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+		    $('.modal-trigger').leanModal();
+		  });

@@ -1,0 +1,41 @@
+extends layout
+
+block content
+	.row
+		.col.s12.m12.l8
+			.row
+				form(name='add' method='post' action='/farmer/products/new' enctype="multipart/form-data")
+					.row
+						.input-field.col.s12.m12.l12
+							h4= 'New Product'
+					.row
+						p
+							b Select an image file:
+						.input-field.col.s12.m12.l12
+							input(type="file" name="productImage" accept="image/*" required)
+					.row
+						.input-field.col.s12.m12.l12
+							input(type='text' id='title' name='title' class='validate' placeholder='Product Name' required)
+							label(for='title')= 'Product Name'					
+					.row
+						.input-field.col.s12.m12.l12
+							textarea(name='description' id='description' class='materialize-textarea' rows= 5 placeholder='Description', required)
+							label(for='description')= 'Description'
+					.row
+						.input-field.col.s12.m4.l6
+							input(type='text' id='quantity' class='validate' name='quantity' placeholder='Quantity' required)
+							label(for='quantity')= 'Quantity'
+					.row
+						.input-field.col.s12.m4.l6
+							input(type='text' id='price' class='validate' name='price' placeholder='Price' required)
+							label(for='price')= 'Price'
+					.row
+						.col.s12.m8
+							.switch						
+								label
+									input(type='checkbox' checked=false name='rotten')
+									span.lever
+									| Rotten fruits.
+					.row						
+						.input-field.col.s12.m6
+							input(type="submit", value="Add Product" class='btn')

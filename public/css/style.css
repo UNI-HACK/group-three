@@ -1,0 +1,63 @@
+.blue-color{
+    color: #1976d2;
+}
+
+.product-description {
+    font-size: 16px;
+}
+
+.product-image img {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+img{
+    max-width: 100%;
+    height: auto;
+}
+
+.search-box{
+    margin-top: 20px;
+}
+
+.btn-fb{
+    background-color: #3a5795;
+    width: 220px;
+    height: 50px;
+}
+
+.btn-fb:hover {
+    background-color: #103480;
+}
+
+.btn-fb li {
+    font-size: 1.3em;
+    margin-top: 15px;
+}
+
+.btn li span{
+    text-transform: capitalize;
+}
+
+.btn-google{
+    background-color: #EA4335;
+    width: 220px;
+    height: 50px;
+}
+
+.btn-google li {
+    font-size: 1.3em;
+    margin-top: 15px;
+}
+
+.btn-google:hover {
+    background-color: #E21301;
+}
+
+.company-img {
+    max-height: 150px !important;
+    max-width: 150px !important;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

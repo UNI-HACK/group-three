@@ -20,8 +20,19 @@ var upload = multer({ storage: storage });
 
 
 router.get('/', isLoggedIn, function(req, res, next) {
-  console.log(req.user);
-  	res.render('customer/index', { customer: req.user, moment: moment });
+  	//res.render('customer/index', { customer: req.user, moment: moment });
+
+    Customer.findOne({ _id : req.user._id }, function(err, customer){
+
+      if(err){
+        console.log(err);
+      } else {        
+        res.render('customer/index', { customer: customer, moment: moment })
+      }
+
+    })
+    .populate('products', 'title description price quantity farmer pictureUrl');
+
 });
 
 router.get('/edit', isLoggedIn, function(req, res, next){
@@ -46,8 +57,7 @@ router.post('/edit', isLoggedIn, function(req, res){
 			
 			customer.save(function (err, customer) {
 				if (err) {
-					// Internal Error.
-					
+					console.log(err);					
 				} else {
 					res.redirect('/customer');
 				}
@@ -80,7 +90,7 @@ router.post('/profileImage', upload.single('newImage'), function (req, res, next
 
 });
 
-// Get list of products for Buyer.
+// Get list of products for Customer.
 
 router.get('/products', isLoggedIn, function (req, res, next){
 
@@ -91,9 +101,9 @@ router.get('/products', isLoggedIn, function (req, res, next){
       res.render('customer/products', { products: products, farmer: req.user});
     }
   })
-  .populate('farmer', 'name  description pictureUrl')
+  .populate('farmer', 'name  description pictureUrl')  
   .sort('-posted')
-  .select('title description quantity price pictureUrl farmer posted rotten');
+  .select('title description quantity price pictureUrl farmer posted rotten products');
 
 });
 
@@ -123,6 +133,56 @@ router.post('/products', isLoggedIn, function(req, res){
   .or(query);
 });
 
+
+// Push a product to the cart
+
+router.post('/product/:productId', function(req, res){
+
+  Customer.findOne({ _id: req.user._id }, function (err, customer) {
+    if (err) {
+      console.log(err);
+      
+    } else {
+
+      customer.products.push(req.params.productId);
+      
+      customer.save(function (err, customer) {
+        if (err) {
+          console.log(err);       
+        } else {
+          res.redirect('/customer/products');
+        }
+      });
+
+    }
+  });
+
+});
+
+// Remove product from cart
+
+router.post('/product/:productId/delete', function(req, res){
+
+  Customer.findOne({ _id: req.user._id }, function (err, customer) {
+    if (err) {
+      console.log(err);
+      
+    } else {
+
+      customer.products.remove(req.params.productId);
+
+      customer.save(function (err, customer) {
+        if (err) {
+          console.log(err);       
+        } else {
+          res.redirect('/customer');
+        }
+      });
+
+    }
+  });
+
+})
 
 function isLoggedIn(req, res, next){
   if(req.isAuthenticated()){

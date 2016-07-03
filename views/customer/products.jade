@@ -27,5 +27,6 @@ block content
 						p
 							b Farmer
 						p= product.farmer.name
-					.card-action						
-						a(href='#') Add to Cart					
+					.card-action
+						form(name='addToCart' method='post' action='/customer/product/#{product._id}')
+							button.blue-color.modal-action.modal-close.waves-effect.waves-green.btn-flat Add to cart

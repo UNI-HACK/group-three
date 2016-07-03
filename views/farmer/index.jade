@@ -6,13 +6,13 @@ block content
 			.card				
 				.card-content
 					.row
-						img(src='farmers/#{farmer.pictureUrl}' alt='#{farmer.name}' class='circle company-img')
+						img(src='farmers/#{farmer.pictureUrl}' alt='#{farmer.name}' class='circle profile-img')
 					.row
 						a.modal-trigger(href='#modal1') Edit your profile image
 						#modal1.modal
 							.modal-content
 								h5.center Edit your profile image
-								img(src='farmers/#{farmer.pictureUrl}' alt='#{farmer.name}' class='circle company-img')
+								img(src='farmers/#{farmer.pictureUrl}' alt='#{farmer.name}' class='circle profile-img')
 								.center
 									form(method="post" action="/farmer/profileImage" enctype="multipart/form-data") 									
 										input(type="file" name="newImage" accept="image/*" required)
